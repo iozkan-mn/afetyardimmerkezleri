@@ -56,6 +56,7 @@ RUN set -ex; \
 USER www-data:www-data
 WORKDIR /var/www/php
 COPY --chown=www-data . /var/www/php
+RUN chmod -R 755 /var/www/php/storage && chmod -R 755 /var/www/php/bootstrap
 
 USER root
 
