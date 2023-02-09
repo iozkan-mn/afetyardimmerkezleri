@@ -21,7 +21,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->date('birthdate');
-            $table->date('identity_no');
+            $table->string('identity_no', 20);
             $table->boolean('status')->default(true);
             $table->string('profile_photo_path', 2048)->nullable();
             $table->rememberToken();
