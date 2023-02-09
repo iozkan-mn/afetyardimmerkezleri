@@ -1,0 +1,41 @@
+version: '3.1'
+
+services:
+  app: #php-fpm7.4
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+    restart: always
+    privileged: true
+    volumes:
+      - ./:/var/www/php:Z
+    working_dir: /var/www/php
+    env_file:
+      - .env
+    networks:
+      - app-network
+  cache:
+    image: redis
+    restart: always
+    privileged: true
+    ports:
+      - "6381:6379"
+    volumes:
+      - ./docker/redis/redis.conf:/etc/redis.conf:Z
+      - ./docker/redis/tmp:/tmp:Z
+    networks:
+      - app-network
+  nginx: # Nginx service
+    image: nginx:alpine
+    container_name: nginx
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www/php
+      - ./docker/config/nginx/:/etc/nginx/conf.d/
+    networks:
+      - app-network
+networks:
+  app-network:
+    driver: bridge
