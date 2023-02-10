@@ -26,3 +26,6 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::get("/afet-yardim-merkezleri", [\App\Http\Controllers\StorageController::class, 'index']);
+Route::get("/{slug}", [\App\Http\Controllers\StorageController::class, 'show']);
