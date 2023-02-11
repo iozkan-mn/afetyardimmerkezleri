@@ -17,6 +17,16 @@ return [
     'Storages' => 'Afet Yardım Merkezleri',
     'manage_storage' => 'Yardım Merkezlerini Yönet',
     'new_storage' => 'Yeni Yardım Merkezi',
+    'new_storage_detail' => 'Yeni Yardım Merkezi ile ilgili irtibat ve temel bilgileri giriniz.',
+    'storage_name' => 'Yardım Merkezi Adı',
+    'storage_description' => 'Yardım Merkezi Hakkında Genel Bilgiler',
+    'storage_opening_time' => 'Yardım Merkezi Açılış Saati',
+    'storage_closing_time' => 'Yardım Merkezi Kapanış Saati',
+    'storage_address' => 'Yardım Merkezi Adresi',
+    'storage_country' => 'Yardım Merkezi Ülke',
+    'storage_city' => 'Yardım Merkezi Şehir',
+    'storage_district' => 'Yardım Merkezi İlçe',
+    'storage_maps' => 'Yardım Merkezi Harita Linki',
 
 
     'menage_team' => 'Takımlar',

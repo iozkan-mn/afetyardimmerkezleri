@@ -24,8 +24,10 @@ return new class extends Migration
             $table->text('address');
             $table->string('country');
             $table->string('city');
+            $table->string('district')->nullable();
+            $table->string('maps')->nullable();
             $table->bigInteger('longitude')->nullable();
-            $table->bigInteger('laitude')->nullable();
+            $table->bigInteger('latitude')->nullable();
             $table->foreignId('team_id')->constrained();
             $table->timestamps();
         });

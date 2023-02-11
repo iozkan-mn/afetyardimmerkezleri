@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\StorageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,20 +22,17 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
-])->group(function () {
+])->prefix('dashboard')->group(function () {
     Route::get('/', function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/{storage}', function () {
-        return view('dashboard');
-    })->name('storage-show');
-
-    Route::get('/new-storage', function () {
-        return view('dashboard');
-    })->name('new-storage');
+    Route::controller(StorageController::class)->prefix('storage')->group(function (){
+        Route::get('new-storage', 'create')->name('new-storage');
+        Route::get('{storage}', 'edit')->name('edit-storage');
+        Route::post('new-storage', 'store');
+    });
 });
 
-Route::get("/afet-yardim-merkezleri", [\App\Http\Controllers\StorageController::class, 'index']);
-Route::get("/{slug}", [\App\Http\Controllers\StorageController::class, 'show']);
-
+Route::get("/", [\App\Http\Controllers\StorageController::class, 'index']);
+Route::get("/{storage}", [\App\Http\Controllers\StorageController::class, 'show']);
