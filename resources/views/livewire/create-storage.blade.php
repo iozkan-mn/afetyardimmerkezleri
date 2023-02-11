@@ -19,21 +19,21 @@
                 <x-slot name="form">
                     <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="name" value="{{ __('message.storage_name') }}" />
-                        <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model.defer="name" autocomplete="name" />
+                        <x-jet-input id="name" type="text" class="mt-1 block w-full" wire:model="name" autocomplete="name" />
                         <x-jet-input-error for="name" class="mt-2" />
                         @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="opening_time" value="{{ __('message.storage_opening_time') }}" />
-                        <x-jet-input id="opening_time" type="text" value="0000" class="mt-1 block w-full" wire:model.defer="opening_time" autocomplete="opening_time" />
+                        <x-jet-input id="opening_time" type="text" value="0000" class="mt-1 block w-full" wire:model="opening_time" autocomplete="opening_time" />
                         <x-jet-input-error for="opening_time" class="mt-2" />
                         @error('opening_time') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>
 
                     <div class="col-span-6 sm:col-span-4">
                         <x-jet-label for="closing_timeStorage" value="{{ __('message.storage_closing_time') }}" />
-                        <x-jet-input id="closing_timeStorage" type="text" value="0000" class="mt-1 block w-full" wire:model.defer="closing_time" autocomplete="closing_time" />
+                        <x-jet-input id="closing_timeStorage" type="text" value="0000" class="mt-1 block w-full" wire:model="closing_time" autocomplete="closing_time" />
                         <x-jet-input-error for="closing_timeStorage" class="mt-2" />
                         @error('closing_time') <span class="text-danger">{{ $message }}</span> @enderror
                     </div>

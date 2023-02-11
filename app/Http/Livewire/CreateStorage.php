@@ -12,11 +12,11 @@ class CreateStorage extends Component
     public $name;
     public $opening_time;
     public $closing_time;
-    public $description;
-    public $country;
-    public $city;
-    public $district;
-    public $maps;
+    // public $description;
+    // public $country;
+    // public $city;
+    // public $district;
+    // public $maps;
 
     protected $rules = [
         'name' => ['required', 'string', 'min:6'],
@@ -29,18 +29,26 @@ class CreateStorage extends Component
         // 'maps' => ['sometimes', 'nullable', 'string'],
     ];
 
+    public function updated($propertyName)
+    {
+      $this->validateOnly($propertyName);
+    }
+
     public function create()
     {
+        $this->reset();
         $this->resetErrorBag();
         $this->resetValidation();
-        
+
         $this->validate();
-        try {
-            Storage::create(['name' => $this->name]);
-        } catch (\Throwable $ex) {
-            session()->flash('result', 'Database error');
-            return false;
-        }
+        // try {
+        //     Storage::create(['name' => $this->name]);
+        // } catch (\Throwable $ex) {
+        //     session()->flash('result', 'Database error');
+        //     return false;
+        // }
+
+        return true;
     }
 
     public function render()
