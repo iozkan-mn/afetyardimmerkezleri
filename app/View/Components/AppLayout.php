@@ -2,6 +2,8 @@
 
 namespace App\View\Components;
 
+use App\Models\Storage;
+use Auth;
 use Illuminate\View\Component;
 use Illuminate\View\View;
 

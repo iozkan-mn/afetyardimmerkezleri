@@ -1,3 +1,7 @@
+@php
+    $storages = App\Models\Storage::where('team_id', Auth::user()->current_team_id)->get();
+@endphp
+
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -18,7 +22,7 @@
                 </div>
             </div>
 
-            <div class="hidden sm:flex sm:items-center sm:ml-9">
+            <div class="hidden sm:flex sm:items-center sm:ml-12">
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                     <div class="ml-3 relative">
@@ -30,7 +34,7 @@
                                     @if (Auth::user()->current_team_id)
                                         {{ Auth::user()->currentTeam->name }}
                                     @else
-                                        {{ __('Manage Team') }}
+                                        {{ __('message.menage_team') }}
                                     @endif
                                         <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
@@ -44,19 +48,19 @@
                                 <div class="w-60">
                                     <!-- Team Management -->
                                     <div class="block px-4 py-2 text-xs text-gray-400">
-                                        {{ __('Manage Team') }}
+                                        {{ __('message.menage_team') }}
                                     </div>
 
                                     @if (Auth::user()->current_team_id)
                                     <!-- Team Settings -->
                                     <x-jet-dropdown-link href="{{ route('teams.show', Auth::user()->currentTeam->id) }}">
-                                        {{ __('Team Settings') }}
+                                        {{ __('message.team_settings') }}
                                     </x-jet-dropdown-link>
                                     @endif
 
                                     @can('create', Laravel\Jetstream\Jetstream::newTeamModel())
                                         <x-jet-dropdown-link href="{{ route('teams.create') }}">
-                                            {{ __('Create New Team') }}
+                                            {{ __('message.new_team') }}
                                         </x-jet-dropdown-link>
                                     @endcan
 
@@ -64,7 +68,7 @@
 
                                     <!-- Team Switcher -->
                                     <div class="block px-4 py-2 text-xs text-gray-400">
-                                        {{ __('Switch Teams') }}
+                                        {{ __('message.team_switch') }}
                                     </div>
 
                                     @foreach (Auth::user()->allTeams() as $team)
@@ -76,8 +80,8 @@
                     </div>
                 @endif
 
-                <!-- Settings Dropdown -->
-                <div class="ml-3 relative">
+                <!-- Storages Dropdown -->
+                <div class="ml-6 relative">
                     <x-jet-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -87,7 +91,7 @@
                             @else
                                 <span class="inline-flex rounded-md">
                                     <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition">
-                                        {{__('Storages') }}
+                                        {{__('message.Storages') }}
 
                                         <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
@@ -100,31 +104,21 @@
                         <x-slot name="content">
                             <!-- Account Management -->
                             <div class="block px-4 py-2 text-xs text-gray-400">
-                                {{ __('Manage Account') }}
+                                {{ __('message.manage_storage') }}
                             </div>
 
-                            <x-jet-dropdown-link href="{{ route('profile.show') }}">
-                                {{ __('Profile') }}
-                            </x-jet-dropdown-link>
-
-                            @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
-                                <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">
-                                    {{ __('API Tokens') }}
+                            @foreach ($storages as $storage)
+                                <x-jet-dropdown-link href="/{{ $storage->slug }}">
+                                    {{ $storage->name }}
                                 </x-jet-dropdown-link>
-                            @endif
+                            @endforeach
 
                             <div class="border-t border-gray-100"></div>
-
-                            <!-- Authentication -->
-                            <form method="POST" action="{{ route('logout') }}" x-data>
-                                @csrf
-
-                                <x-jet-dropdown-link href="{{ route('logout') }}"
-                                         @click.prevent="$root.submit();">
-                                    {{ __('Log Out') }}
-                                </x-jet-dropdown-link>
-                            </form>
-                        </x-slot>
+                            <x-jet-dropdown-link href="{{ route('new-storage') }}">
+                                {{ __('message.new_storage') }}
+                            </x-jet-dropdown-link>
+                            
+                    </x-slot>
                     </x-jet-dropdown>
                 </div>
                  <!-- Settings Dropdown -->

@@ -21,7 +21,8 @@ class UserSeeder extends Seeder
             'email' => 'admin@admin.com',
             'password' => bcrypt('password'),
             'birthdate' => '2023-01-01',
-            'identity_no' => '11111111111'
+            'identity_no' => '11111111111',
+            'current_team_id' => 1,
         ]);
     }
 }

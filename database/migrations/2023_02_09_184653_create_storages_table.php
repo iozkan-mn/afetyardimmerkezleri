@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('city');
             $table->bigInteger('longitude')->nullable();
             $table->bigInteger('laitude')->nullable();
+            $table->foreignId('team_id')->constrained();
             $table->timestamps();
         });
     }

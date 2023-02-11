@@ -22,7 +22,8 @@ class StorageSeeder extends Seeder
             'description' => 'Akşam 9 dan Sonra Malzeme Kabulü Yapmamaktayız',
             'address' => 'Zafer SB Mah. Şht. Süleyman Ergin Cad. No:2 Gaziemir',
             'country' => 'Türkiye',
-            'city' => 'İzmir'
+            'city' => 'İzmir',
+            'team_id' => 1,
         ]);
     }
 }
