@@ -3,8 +3,6 @@
 namespace App\Http\Livewire;
 
 use App\Models\Storage;
-use Exception;
-use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 
 class CreateStorage extends Component
@@ -45,6 +43,6 @@ class CreateStorage extends Component
 
     public function render()
     {
-        return view('livewire.create-storage');
+        return view('storages.create-storage-form');
     }
 }

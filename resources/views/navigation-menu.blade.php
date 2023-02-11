@@ -108,7 +108,7 @@
                             </div>
 
                             @foreach ($storages as $storage)
-                                <x-jet-dropdown-link href="/{{ $storage->slug }}">
+                                <x-jet-dropdown-link href="{{ route('update-storage', $storage->slug) }}">
                                     {{ $storage->name }}
                                 </x-jet-dropdown-link>
                             @endforeach

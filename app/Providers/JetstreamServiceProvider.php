@@ -9,8 +9,10 @@ use App\Actions\Jetstream\DeleteUser;
 use App\Actions\Jetstream\InviteTeamMember;
 use App\Actions\Jetstream\RemoveTeamMember;
 use App\Actions\Jetstream\UpdateTeamName;
+use App\Http\Livewire\CreateStorage;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Jetstream\Jetstream;
+use Livewire\Livewire;
 
 class JetstreamServiceProvider extends ServiceProvider
 {
@@ -19,7 +21,7 @@ class JetstreamServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        Livewire::component('storages.create-storage-form', CreateStorage::class);
     }
 
     /**
@@ -28,7 +30,6 @@ class JetstreamServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->configurePermissions();
-
         Jetstream::createTeamsUsing(CreateTeam::class);
         Jetstream::updateTeamNamesUsing(UpdateTeamName::class);
         Jetstream::addTeamMembersUsing(AddTeamMember::class);

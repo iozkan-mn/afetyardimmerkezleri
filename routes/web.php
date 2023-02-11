@@ -22,15 +22,14 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified'
-])->prefix('dashboard')->group(function () {
-    Route::get('/', function () {
+])->group(function () {
+    Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
 
-    Route::controller(StorageController::class)->prefix('storage')->group(function (){
+    Route::controller(StorageController::class)->prefix('storage')->group(function () {
         Route::get('new-storage', 'create')->name('new-storage');
-        Route::get('{storage}', 'edit')->name('edit-storage');
-        Route::post('new-storage', 'store');
+        Route::get('{storage}', 'update')->name('update-storage');
     });
 });
 

@@ -1,4 +1,3 @@
-
 <x-jet-form-section submit="create">
     <x-slot name="title">
         {{ __('message.new_storage') }}
@@ -7,8 +6,6 @@
     <x-slot name="description">
         {{ __('message.new_storage_detail') }}
     </x-slot>
-    
- 
 
     <x-slot name="form">
         @if (session()->has('success'))

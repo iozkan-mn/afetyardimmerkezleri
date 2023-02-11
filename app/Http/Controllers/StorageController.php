@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Storage\CreateStorageRequest;
 use App\Models\Storage;
-use Laravel\Jetstream\Jetstream;
-use Request;
+use Illuminate\Http\Request;
 
 class StorageController extends Controller
 {
@@ -26,8 +24,8 @@ class StorageController extends Controller
         return view('storages.create')->layout('layouts.app');
     }
 
-    public function update(Request $request) 
+    public function update(Request $request, Storage $storage) 
     {
-        return view('storages.create')->layout('layouts.app');
+        return view('storages.update', compact('storage'))->layout('layouts.app');
     }
 }
