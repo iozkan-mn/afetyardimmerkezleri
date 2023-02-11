@@ -33,7 +33,7 @@
         MYSQL_ROOT_PASSWORD: mariadb
         MYSQL_DATABASE: mariadb
       ports:
-        - "3300:3306"
+        - "3306:3306"
       networks:
         - app-network
     cache:
@@ -61,7 +61,7 @@
       links:
         - db
         - cache
-    mailnotify:
+    mail:
       image: mailhog/mailhog
       ports:
         - 1020:1025 # smtp server
