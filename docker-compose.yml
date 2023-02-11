@@ -32,7 +32,7 @@ services:
           MYSQL_ROOT_PASSWORD: mariadb
           MYSQL_DATABASE: mariadb
         ports:
-          - "3306:3306"
+          - "3300:3306"
         networks:
             - app-network
     cache:

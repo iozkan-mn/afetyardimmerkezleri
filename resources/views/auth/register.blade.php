@@ -14,17 +14,17 @@
                 <x-jet-input id="firstname" class="block mt-1 w-full" type="text" name="firstname" :value="old('firstname')" required autofocus autocomplete="firstname" />
             </div>
             
-            <div class="mt-4">
+            <div>
                 <x-jet-label for="lastname" value="{{ __('auth.lastname') }}" />
                 <x-jet-input id="lastname" class="block mt-1 w-full" type="text" name="lastname" :value="old('lastname')" required autofocus autocomplete="lastname" />
             </div>
 
-            <div class="mt-4">
+            <div>
                 <x-jet-label for="birthdate" value="{{ __('auth.birth_date') }}" />
                 <x-jet-input id="birthdate" class="block mt-1 w-full" type="date" name="birthdate" :value="old('birthdate')" required autofocus autocomplete="birthdate" />
             </div>
 
-            <div class="mt-4">
+            <div>
                 <x-jet-label for="identity_no" value="{{ __('auth.identity_no') }}" />
                 <x-jet-input id="identity_no" class="block mt-1 w-full" type="text" name="identity_no" :value="old('identity_no')" required autofocus autocomplete="identity_no" />
             </div>

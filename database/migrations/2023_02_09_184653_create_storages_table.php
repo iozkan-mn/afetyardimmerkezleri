@@ -18,15 +18,14 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->boolean('status')->default(true);
-            $table->time('opening_time')->nullable();
-            $table->time('closing_time')->nullable();
+            $table->string('opening_time')->nullable();
+            $table->string('closing_time')->nullable();
             $table->text('description');
             $table->text('address');
             $table->string('country');
             $table->string('city');
             $table->bigInteger('longitude')->nullable();
             $table->bigInteger('laitude')->nullable();
-            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }
