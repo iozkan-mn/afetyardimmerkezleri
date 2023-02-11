@@ -6,16 +6,42 @@ use Auth;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Storage extends Model
 {
-    use HasFactory;
+    use HasFactory, HasSlug;
 
     protected $fillable = [
         'name', 'description', 'opening_time', 'closing_time',
-        'country', 'city', 'district', 'maps'
+        'country', 'city', 'district', 'address', 'maps', 'team_id'
     ];
-    
+
+    /**
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->team_id = Auth::user()->current_team_id;
+        });
+    }
+
+    /**
+     * Route Key
+     *
+     * @return string
+     */    
     public function getRouteKeyName() :string
     {
         return 'slug';

@@ -23,12 +23,11 @@ class StorageController extends Controller
 
     public function create(Request $request) 
     {
-        return view('storages.new')
-            ->layout('layouts.app');
+        return view('storages.create')->layout('layouts.app');
     }
 
-    public function store(CreateStorageRequest $request) 
+    public function update(Request $request) 
     {
-        return Storage::create($request->validated());
+        return view('storages.create')->layout('layouts.app');
     }
 }

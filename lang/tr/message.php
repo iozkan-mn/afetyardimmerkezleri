@@ -27,6 +27,7 @@ return [
     'storage_city' => 'Yardım Merkezi Şehir',
     'storage_district' => 'Yardım Merkezi İlçe',
     'storage_maps' => 'Yardım Merkezi Harita Linki',
+    'storage_added' => '<strong>:name</strong> Afet Merkezi Başarıyla Oluşturuldu',
 
 
     'menage_team' => 'Takımlar',
