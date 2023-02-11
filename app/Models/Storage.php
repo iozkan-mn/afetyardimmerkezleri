@@ -33,7 +33,7 @@ class Storage extends Model
         parent::boot();
 
         static::creating(function ($model) {
-            $model->team_id = Auth::user()->current_team_id;
+            $model->team_id = Auth::user()->current_team_id ?? 1;
         });
     }
 
