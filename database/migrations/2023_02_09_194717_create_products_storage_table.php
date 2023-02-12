@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('priority_product_storage', function (Blueprint $table) {
+        Schema::create('products_storage', function (Blueprint $table) {
             $table->id();
             $table->foreignId('storage_id')->nullable()->constrained();
-            $table->foreignId('product_id')->nullable()->constrained();
+            $table->foreignId('products_id')->nullable()->constrained();
             $table->enum('priority', ['none', 'low', 'medium', 'high', 'very_high'])->default('none');
             $table->timestamps();
         });

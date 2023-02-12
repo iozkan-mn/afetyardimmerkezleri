@@ -6,6 +6,8 @@ use Auth;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 
@@ -50,5 +52,12 @@ class Storage extends Model
     public function ownStorages() : BelongsTo
     {
         return $this->belongsto(self::class)->where('team_id', Auth::user()->current_team_id);
+    }
+    public function products() : BelongsToMany
+    {
+        return $this->belongsToMany(Products::class)
+            ->whereNull('team_id')
+            ->orWhere('team_id', Auth::user()->current_team_id)
+            ->withPivot(['priority'])->orderBy('priority', 'DESC');
     }
 }
