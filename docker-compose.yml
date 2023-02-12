@@ -1,64 +1,72 @@
-version: '3.1'
+  version: '3.1'
 
-services:
-    app: #php-fpm7.4
-        build:
-          context: .
-          dockerfile: Dockerfile
-        container_name: app
-        restart: always
-        privileged: true
-        volumes:
-          - ./:/var/www/php:Z
-        working_dir: /var/www/php
-        env_file:
-          - .env
-        networks:
-          - app-network
-        links:
-            - db
-            - cache
+  services:
+    app:
+      #php-fpm7.4
+      build:
+        context: .
+        dockerfile: Dockerfile
+      container_name: app
+      restart: always
+      privileged: true
+      volumes:
+        - ./:/var/www/php:Z
+      working_dir: /var/www/php
+      env_file:
+        - .env
+      networks:
+        - app-network
+      links:
+        - db
+        - cache
     db:
-        container_name: mariadb
-        image: mariadb:10.6.7
-        # image: mysql:8.0.25
-        platform: linux/arm64/v8
-        # platform: linux/amd64
-        command: --default-authentication-plugin=mysql_native_password
-        restart: always
-        volumes:
-          - ./docker/mysql:/var/lib/mysql:Z
-        environment:
-          MYSQL_ROOT_PASSWORD: mariadb
-          MYSQL_DATABASE: mariadb
-        ports:
-          - "3306:3306"
-        networks:
-            - app-network
+      container_name: mariadb
+      image: mariadb:10.6.7
+      # image: mysql:8.0.25
+      platform: linux/arm64/v8
+      # platform: linux/amd64
+      command: --default-authentication-plugin=mysql_native_password
+      restart: always
+      volumes:
+        - ./docker/mysql:/var/lib/mysql:Z
+      environment:
+        MYSQL_ROOT_PASSWORD: mariadb
+        MYSQL_DATABASE: mariadb
+      ports:
+        - "3306:3306"
+      networks:
+        - app-network
     cache:
-        image: redis
-        restart: always
-        privileged: true
-        ports:
-          - "6381:6379"
-        volumes:
-          - ./docker/redis/redis.conf:/etc/redis.conf:Z
-          - ./docker/redis/tmp:/tmp:Z
-        networks:
-          - app-network
-    nginx: # Nginx service
-        image: nginx:alpine
-        container_name: nginx
-        ports:
-          - "8000:80"
-        volumes:
-          - ./:/var/www/php
-          - ./docker/config/nginx/:/etc/nginx/conf.d/
-        networks:
-          - app-network
-        links:
-            - db
-            - cache
-networks:
+      image: redis
+      restart: always
+      privileged: true
+      ports:
+        - "6381:6379"
+      volumes:
+        - ./docker/redis/redis.conf:/etc/redis.conf:Z
+        - ./docker/redis/tmp:/tmp:Z
+      networks:
+        - app-network
+    nginx:
+      # Nginx service
+      image: nginx:alpine
+      container_name: nginx
+      ports:
+        - "8000:80"
+      volumes:
+        - ./:/var/www/php
+        - ./docker/config/nginx/:/etc/nginx/conf.d/
+      networks:
+        - app-network
+      links:
+        - db
+        - cache
+    mail:
+      image: mailhog/mailhog
+      ports:
+        - 1020:1025 # smtp server
+        - 8022:8025 # web ui
+
+  networks:
     app-network:
-        driver: bridge
+      driver: bridge

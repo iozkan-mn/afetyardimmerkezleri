@@ -23,7 +23,7 @@ class StorageSeeder extends Seeder
             'address' => 'Zafer SB Mah. Şht. Süleyman Ergin Cad. No:2 Gaziemir',
             'country' => 'Türkiye',
             'city' => 'İzmir',
-            'user_id' => 1
+            'team_id' => 1,
         ]);
     }
 }
