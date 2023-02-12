@@ -5,8 +5,10 @@ namespace App\Http\Livewire;
 use App\Models\Storage;
 use Livewire\Component;
 
-class CreateStorage extends Component
+class UpdateStorage extends Component
 {
+    public Storage $storage;
+
     public $name;
     public $opening_time;
     public $closing_time;
@@ -29,20 +31,36 @@ class CreateStorage extends Component
         'maps' => ['sometimes', 'nullable', 'string'],
     ];
 
-    public function create()
+    public function mount()
+    {
+        $this->storage = request()->storage;
+        $this->name = $this->storage->name;
+        $this->opening_time = $this->storage->opening_time;
+        $this->closing_time = $this->storage->closing_time;
+        $this->description = $this->storage->description;
+        $this->country = $this->storage->country;
+        $this->city = $this->storage->city;
+        $this->district = $this->storage->district;
+        $this->address = $this->storage->address;
+        $this->maps = $this->storage->maps;
+
+    }
+    
+    public function update()
     {   
         $validated = $this->validate();
         try {
-            $storage = Storage::create($validated);
+           $this->storage->update($validated);
         } catch (\Throwable $ex) {
             $this->addError('result', $ex->getMessage());
         }
-        session()->flash('success', __('message.storage_added', ['name' => $validated['name']]));
-        redirect()->to(route('update-storage', $storage->slug));
+        session()->flash('success', __('message.storage_updated', ['name' => $validated['name']]));
+        redirect()->to(route('update-storage', $this->storage->slug));
     }
+
 
     public function render()
     {
-        return view('storages.create-storage-form');
+        return view('storages.update-storage-form');
     }
 }
