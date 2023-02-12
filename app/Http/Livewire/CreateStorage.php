@@ -33,12 +33,12 @@ class CreateStorage extends Component
     {   
         $validated = $this->validate();
         try {
-            Storage::create($validated);
+            $storage = Storage::create($validated);
         } catch (\Throwable $ex) {
             $this->addError('result', $ex->getMessage());
         }
         session()->flash('success', __('message.storage_added', ['name' => $validated['name']]));
-        redirect()->to(route('update-storage', $this->storage->slug));
+        redirect()->to(route('update-storage', $storage->slug));
     }
 
     public function render()
