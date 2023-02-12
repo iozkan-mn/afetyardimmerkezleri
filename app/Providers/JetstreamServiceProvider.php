@@ -10,6 +10,7 @@ use App\Actions\Jetstream\InviteTeamMember;
 use App\Actions\Jetstream\RemoveTeamMember;
 use App\Actions\Jetstream\UpdateTeamName;
 use App\Http\Livewire\CreateStorage;
+use App\Http\Livewire\ProductsStorage;
 use App\Http\Livewire\UpdateStorage;
 use Blade;
 use Illuminate\Support\ServiceProvider;
@@ -25,6 +26,7 @@ class JetstreamServiceProvider extends ServiceProvider
     {
         Livewire::component('storages.create-storage-form', CreateStorage::class);
         Livewire::component('storages.update-storage-form', UpdateStorage::class);
+        Livewire::component('storages.products-storage-form', ProductsStorage::class);
     }
 
     /**
