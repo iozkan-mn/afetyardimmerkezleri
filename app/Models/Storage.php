@@ -43,15 +43,15 @@ class Storage extends Model
      * Route Key
      *
      * @return string
-     */    
+     */
     public function getRouteKeyName() :string
     {
         return 'slug';
     }
 
-    public function ownStorages() : BelongsTo
+    public static function ownStorages()
     {
-        return $this->belongsto(self::class)->where('team_id', Auth::user()->current_team_id);
+        return (new Storage)->where('team_id', Auth::user()->current_team_id);
     }
     public function products() : BelongsToMany
     {

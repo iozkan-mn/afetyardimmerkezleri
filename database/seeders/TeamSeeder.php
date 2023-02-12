@@ -17,16 +17,9 @@ class TeamSeeder extends Seeder
     public function run()
     {
         Team::create([
-            'id' => 1,
             'user_id' => 1,
             'name' => 'Test Team',
             'personal_team' => 0
-        ]);
-
-        DB::table('team_user')->insert([
-            'user_id' => 1,
-            'team_id' => 1,
-            'role' => 'Admin',
         ]);
     }
 }
