@@ -45,6 +45,19 @@ class UpdateStorage extends Component
         $this->maps = $this->storage->maps;
 
     }
+    
+    public function update()
+    {   
+        $validated = $this->validate();
+        try {
+           $this->storage->update($validated);
+        } catch (\Throwable $ex) {
+            $this->addError('result', $ex->getMessage());
+        }
+        session()->flash('success', __('message.storage_updated', ['name' => $validated['name']]));
+        redirect()->to(route('update-storage', $this->storage->slug));
+    }
+
 
     public function render()
     {

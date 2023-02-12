@@ -38,7 +38,7 @@ class CreateStorage extends Component
             $this->addError('result', $ex->getMessage());
         }
         session()->flash('success', __('message.storage_added', ['name' => $validated['name']]));
-        redirect()->to(route('new-storage'));
+        redirect()->to(route('update-storage', $this->storage->slug));
     }
 
     public function render()
